@@ -1,0 +1,28 @@
+{
+  "name": "d3-descendant-tree",
+  "version": "1.0.0",
+  "description": "Draws a family tree in a descendant chart format (all descendants of an individual).",
+  "author": "Thanh Tran <trongthanh@gmail.com> (http://int3ractive.com)",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx live-server ."
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 5.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trongthanh/d3-descendant-tree.git"
+  },
+  "keywords": [
+    "d3",
+    "family",
+    "tree"
+  ],
+  "bugs": {
+    "url": "https://github.com/trongthanh/d3-descendant-tree/issues"
+  },
+  "homepage": "https://github.com/trongthanh/d3-descendant-tree#readme"
+}
