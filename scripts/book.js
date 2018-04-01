@@ -1,7 +1,7 @@
 /* global $, Handlebars*/
 
 $(document).ready(function() {
-  var jsonName = location.hash.split('#')[1] || 'stark';
+  var jsonName = location.hash.split('#')[1] || 'trans';
   var jsonPath = 'json/' + jsonName + '.json';
   var context;
 

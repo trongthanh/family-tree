@@ -1,0 +1,155 @@
+---
+name: Trần Phước Cửu
+gender: male
+bio:
+image: images/placeholder.png
+spouse:
+  name: Lê Thị Đán
+children:
+  - name: Trần Phước Chuyên
+    gender: male
+  - name: Trần Phước Huyên
+    gender: male
+    spouse:
+      name: Nguyễn Thị Đạm
+    children:
+      - name: Trần Phước Chức
+        gender: male
+        spouse:
+          name: Huỳnh Thị Út
+          gender: female
+      - name: Trần Phước Đại
+        gender: male
+      - name: Trần Phước Đô
+        gender: male
+      - name: Trần Phước Ti
+        gender: male
+      - name: Trần Phước Cầu
+        gender: male
+        spouse:
+          name: Nguyễn Thị Thâu
+          gender: female
+        children:
+          - name: Trần Văn Thìn
+            gender: male
+          - name: Trần Văn Tị
+            gender: male
+            spouse:
+              name: Phạm Thị Nghĩa
+              gender: female
+            children:
+              - name: Trần Thị Vân
+              - name: Trần Văn Khoa
+              - name: Trần Thị Tràng
+              - name: Trần Thị Nhãn
+              - name: Trần Văn An
+                spouse:
+                  name: Võ Thị Dư
+              - name: Trần Thị Nơi
+              - name: Trần Văn Tiên
+                spouse:
+                  name: Nguyễn Thị Diệu
+              - name: Trần Thị Thàng
+              - name: Trần Thị Điều
+              - name: Trần Văn Phước
+                spouse:
+                  name: Đặng Thị Trâm
+                children:
+                  - name: Trần Văn Được
+                    spouse:
+                      name: Quách Thị Niên
+                  - name: Trần Văn Hạt
+                  - name: Trần Thị Tam
+                    spouse:
+                      name: Nguyễn Văn Nhiếp
+                  - name: Trần Thị Dưỡng
+                    spouse:
+                      name: Nguyễn Văn Dần
+                  - name: Trần Văn Thua
+                    spouse:
+                      name: Trần Thị Tuyết Ngà
+                  - name: Trần Văn Ai
+                    spouse:
+                      name: Nguyễn Thị Sảnh
+                  - name: Trần Văn Đẹt
+                    spouse:
+                      name: Nguyễn Thị Nhãn
+                    children:
+                      - name: Trần Thị Bạch Tuyết
+                        bio: Cô Hai
+                        image: images/placeholder-female.png
+                        spouse:
+                          name: Nguyễn Văn Nhiều
+                      - name: Trần Văn Trọng
+                        bio: My Father
+                        spouse:
+                          name: Ngô Thị Thanh Hà
+                        children:
+                          - name: Trần Trọng Thanh
+                            spouse: Nguyễn Thị Thu Thảo
+                            children:
+                              - name: Trần Thiện
+                          - name: Trần Trọng Thanh Tùng
+                          - name: Trần Trọng Thanh Tâm
+                      - name: Trần Thị Thu Lệ
+                        children:
+                          - name: Nguyễn Như Khang
+                      - name: Trần Thị Thu Vân
+                        children:
+                          - name: Nguyễn Quang Anh Vũ
+                          - name: Nguyễn Như Nguyện
+                      - name: Trần Thị Thu Hà
+                        children:
+                          - name: Ngô Hoàng Yến Nhi
+                      - name: Trần Thị Thu Oanh
+                        children:
+                          - name: con cô Oanh 1
+                          - name: con cô Oanh 2
+                      - name: Trần Thị Thu Hồng
+                        children:
+                          - name: Lương
+                          - name: Vỹ
+                  - name: Trần Văn Út
+                    spouse:
+                      name: Phạm Thị Chính
+
+          - name: Trần Thị Sắt
+            gender: female
+          - name: Trần Phước Nhà
+            gender: male
+            spouse:
+              name: Nguyễn Thị Hiền
+      - name: Trần Phước Diên
+        gender: male
+        spouse:
+          name: Nguyễn Thị Huệ
+      - name: Trần Phước Mạo
+        gender: male
+      - name: Trần Phước Sang
+        gender: male
+  - name: Trần Phước Đạo
+    gender: male
+  - name: Trần Phước Đường
+    gender: male
+    spouse:
+      name: Nguyễn Thị Lợi
+    children:
+      - name: Trần Thị Hoa
+        gender: female
+      - name: Trần Văn Du
+        gender: male
+        spouse:
+          name: Phạm Thị Biệp
+      - name: Trần Văn Lưu
+        gender: male
+        spouse:
+          name: Nguyễn Thị Dư
+
+  - name: Con thứ 5 (?)
+    gender: male
+    children:
+      - name: Trần Văn Đàn
+        gender: male
+        spouse:
+          name: Nguyễn Thị Nghé & Đặng Thị Đậu
+  - name: Con thứ 6 (?)

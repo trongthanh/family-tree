@@ -20,6 +20,8 @@ $ yarn start
 
 this will start a live Node server at 0.0.0.0:8080 using `npx` and `live-server`
 
+<!-- FIXME: Below part need revise -->
+
 Use #sourcename to load a specific JSON file.
   - 0.0.0.0:8000#stark loads json/stark.json
 

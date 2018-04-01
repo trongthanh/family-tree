@@ -1,0 +1,22 @@
+body,
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.node circle {
+	fill: #fff;
+	stroke: #888;
+	stroke-width: 3px;
+}
+
+.node text {
+	font: 12px sans-serif;
+}
+
+.link {
+	fill: none;
+	stroke: #888;
+	stroke-width: 2px;
+}

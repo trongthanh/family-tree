@@ -1,7 +1,4 @@
-/* global d3, $*/
-
-var jsonName = location.hash.split('#')[1] || 'stark';
-var jsonPath = 'json/' + jsonName + '.json';
+/* global d3, $, jsyaml*/
 
 var publicTree;
 var running = 1; // number of running asynchronous functions
@@ -23,7 +20,9 @@ function parseTree(tree, replace) {
 	}
 }
 
-d3.json(jsonPath, function(error, treeData) {
+$.get('data/trans.yml').done(function(dataStr) {
+	console.log(dataStr);
+	const treeData = jsyaml.load(dataStr);
 	publicTree = treeData;
 	parseTree(publicTree);
 	running--;
