@@ -6,7 +6,16 @@ module.exports = {
 		'block-scoped-var': 1,
 		camelcase: 2,
 		'comma-style': [2, 'last'],
-		'comma-dangle': 2,
+		'comma-dangle': [
+			'error',
+			{
+				arrays: 'always-multiline',
+				objects: 'always-multiline',
+				imports: 'always-multiline',
+				exports: 'always-multiline',
+				functions: 'always-multiline',
+			},
+		],
 		'comma-spacing': [2, { before: false, after: true }],
 		curly: [2, 'all'],
 		'dot-notation': [2, { allowKeywords: true }],

@@ -5,13 +5,14 @@ html {
 	margin: 0;
 }
 
-.node circle {
+.node rect {
 	fill: #fff;
 	stroke: #888;
-	stroke-width: 3px;
+	stroke-width: 2px;
 }
 
-.node text {
+.node-name,
+.spouse-name {
 	font: 12px sans-serif;
 }
 
@@ -19,4 +20,8 @@ html {
 	fill: none;
 	stroke: #888;
 	stroke-width: 2px;
+}
+
+.expand-icon {
+	font-size: 16px;
 }
