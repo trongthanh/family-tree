@@ -7,6 +7,7 @@
 $(function() {
 	var width = window.innerWidth;
 	var height = window.innerHeight;
+	var halfWidth = width / 2;
 	// append the svg obgect to the body of the page
 	// appends a 'group' element to 'svg'
 	// moves the 'group' element to the top left margin
@@ -86,7 +87,7 @@ $(function() {
 
 		// Normalize for fixed-depth.
 		nodes.forEach(function(d) {
-			d.y = d.depth * 180;
+			d.y = d.depth * 250;
 		});
 
 		// ****************** Nodes section ***************************
@@ -195,6 +196,7 @@ $(function() {
 		nodeExit.select('text').style('fill-opacity', 1e-6);
 
 		// ****************** links section ***************************
+		var connector = elbow;
 
 		// Update the links...
 		var link = svg.selectAll('path.link').data(links, function(d) {
@@ -208,7 +210,7 @@ $(function() {
 			.attr('class', 'link')
 			.attr('d', function(d) {
 				var o = { x: source.x0, y: source.y0 };
-				return diagonal(o, o);
+				return connector(o, o);
 			});
 
 		// UPDATE
@@ -219,7 +221,7 @@ $(function() {
 			.transition()
 			.duration(duration)
 			.attr('d', function(d) {
-				return diagonal(d, d.parent);
+				return connector(d, d.parent);
 			});
 
 		// Remove any exiting links
@@ -229,7 +231,7 @@ $(function() {
 			.duration(duration)
 			.attr('d', function(d) {
 				var o = { x: source.x, y: source.y };
-				return diagonal(o, o);
+				return connector(o, o);
 			})
 			.remove();
 
@@ -247,6 +249,12 @@ $(function() {
               ${d.y} ${d.x}`;
 
 			return path;
+		}
+
+		// Mind that we are drawing with x & y swapped to turn the tree horizontal
+		function elbow(s, d) {
+			let hy = (s.y - d.y) / 2;
+			return `M${d.y},${d.x} H${d.y + hy} V${s.x} H${s.y}`;
 		}
 
 		// Toggle children on click.
