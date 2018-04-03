@@ -5,10 +5,27 @@ html {
 	margin: 0;
 }
 
-.node rect {
+.chart-bg {
+	fill: #ddd;
+	cursor: move;
+}
+
+.node--has-children {
+	cursor: pointer;
+}
+
+.box {
 	fill: #fff;
 	stroke: #888;
 	stroke-width: 2px;
+}
+
+.box--female {
+	stroke: hotpink;
+}
+
+.box--male {
+	stroke: steelblue;
 }
 
 .node-name,

@@ -1,13 +1,12 @@
 /**
  * ©2018 Thanh Tran
  *
- * The collapsible tree example: https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
+ * Initially based on the collapsible tree example: https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
  */
 /*global $, d3, jsyaml*/
 $(function() {
 	var width = window.innerWidth;
 	var height = window.innerHeight;
-	var halfWidth = width / 2;
 	// append the svg obgect to the body of the page
 	// appends a 'group' element to 'svg'
 	// moves the 'group' element to the top left margin
@@ -21,13 +20,13 @@ $(function() {
 		.append('rect')
 		.attr('width', width)
 		.attr('height', height)
-		.attr('fill', '#ddd');
+		.classed('chart-bg', true);
 
 	svg = svg.append('g').attr('class', 'tree-container');
 
 	var zoom = d3
 		.zoom()
-		.scaleExtent([0.5, 10])
+		.scaleExtent([0.4, 4])
 		.on('zoom', function() {
 			// console.log('on zoom', d3.event.transform);
 			svg.attr('transform', d3.event.transform);
@@ -66,13 +65,11 @@ $(function() {
 	var root;
 
 	// declares a tree layout and assigns the size
-	var treemap = d3
-		.tree()
-		.size([800, width])
-		.separation(function(a, b) {
-			// TODO: separation and size by depth
-			return a.parent === b.parent ? 3 : 4;
-		});
+	var treemap = d3.tree().size([2000, width]);
+	// .separation(function(a, b) {
+	// 	// TODO: separation and size by depth
+	// 	return a.parent === b.parent ? 3 : 4;
+	// });
 
 	// Collapse the node and all it's children
 	function collapse(d) {
@@ -107,8 +104,13 @@ $(function() {
 		// Enter any new modes at the parent's previous position.
 		var nodeEnter = node
 			.enter()
-			.append('g')
-			.attr('class', 'node')
+			.insert('g', ':first-child') // children should be below parents so that the transition looks nicer
+			.attr('class', function(d) {
+				if (d._children) {
+					return 'node node--has-children';
+				}
+				return 'node';
+			})
 			.attr('transform', function(/*d*/) {
 				return 'translate(' + source.y0 + ',' + source.x0 + ')';
 			})
@@ -120,21 +122,20 @@ $(function() {
 		// Add Rectangle as text box for the nodes
 		nodeEnter
 			.append('rect')
-			.attr('class', 'node')
-			.attr('x', -boxW / 2)
+			.attr('x', d => (d.data.boxW ? -d.data.boxW / 2 : -boxW / 2))
 			.attr('y', -boxH / 2)
-			.attr('width', boxW)
+			.attr('width', d => d.data.boxW || boxW)
 			.attr('height', boxH)
 			.attr('rx', 0) // corner radius x
 			.attr('ry', 0) // corner radius y
-			.style('stroke', function(d) {
+			.attr('class', function(d) {
 				var gender = String(d.data.gender).toLowerCase();
 				if (gender === 'female') {
-					return 'hotpink';
+					return 'box box--female';
 				} else if (gender === 'male') {
-					return 'steelblue';
+					return 'box box--male';
 				}
-				return '#888';
+				return 'box';
 			});
 
 		// Add labels for the nodes
@@ -147,7 +148,7 @@ $(function() {
 			})
 			.attr('text-anchor', 'middle')
 			.text(function(d) {
-				return d.data.name;
+				return d.data.name; // + d.depth;
 			});
 
 		// Add spouse name next to tree's member
@@ -160,7 +161,7 @@ $(function() {
 			.attr('dy', '1em')
 			.attr('text-anchor', 'middle')
 			.text(function(d) {
-				return '⚭' + d.data.spouse.name;
+				return '⚭' + (d.data.spouse.name || d.data.spouse);
 			});
 
 		// Add expand indicator
@@ -171,14 +172,12 @@ $(function() {
 			.append('text')
 			.classed('expand-icon', true)
 			.attr('text-anchor', 'middle')
-			.attr('cursor', 'pointer')
 			.attr('x', boxW / 2 + 10)
-			.attr('y', function(d) {
-				return d.children ? -5 : 4;
+			.attr('y', 5) // shift middle
+			.attr('visibility', function(d) {
+				return d.children ? 'hidden' : 'visible';
 			})
-			.text(function(d) {
-				return d.children ? '⊖' : '⊕';
-			});
+			.text('⊕');
 
 		// UPDATE
 		var nodeUpdate = nodeEnter.merge(node);
@@ -192,14 +191,9 @@ $(function() {
 			});
 
 		// Update the expand / close indicator
-		nodeUpdate
-			.select('text.expand-icon')
-			.attr('y', function(d) {
-				return d.children ? -5 : 4;
-			})
-			.text(function(d) {
-				return d.children ? '⊖' : '⊕';
-			});
+		nodeUpdate.selectAll('text.expand-icon').attr('visibility', function(d) {
+			return d.children ? 'hidden' : 'visible';
+		});
 
 		// Remove any exiting nodes
 		var nodeExit = node
@@ -212,7 +206,7 @@ $(function() {
 			.remove();
 
 		// On exit reduce the opacity of text labels
-		nodeExit.select('text').style('fill-opacity', 1e-6);
+		nodeExit.selectAll('text').style('fill-opacity', 0);
 
 		// ****************** links section ***************************
 		var connector = elbow;
@@ -260,12 +254,12 @@ $(function() {
 			d.y0 = d.y;
 		});
 
-		// Creates a curved (diagonal) path from parent to the child nodes
+		// Creates a curved (diagonal) path from parent to the child nodes (UNUSED)
 		// eslint-disable-next-line
 		function diagonal(s, d) {
 			let path = `M ${s.y} ${s.x}
-            C ${(s.y + d.y) / 2} ${s.x},
-              ${(s.y + d.y) / 2} ${d.x},
+            C ${s.y + (d.y - s.y) * 0.8} ${s.x},
+              ${s.y + (d.y - s.y) * 0.1} ${d.x},
               ${d.y} ${d.x}`;
 
 			return path;
