@@ -34,7 +34,7 @@ $(function() {
 
 	// initial panning position
 	// FIXME: there is known issue that the tree container shift left suddently when start panning
-	zoom.translateBy(svg, 90, 0);
+	zoom.translateBy(svg, 90, -500);
 	// svg.call(zoom.transform, d3.zoomIdentity.translate(90, 0));
 
 	rectBg.call(zoom);
@@ -63,9 +63,10 @@ $(function() {
 	var i = 0;
 	var duration = 750;
 	var root;
+	var TREE_HEIGHT = 2400;
 
 	// declares a tree layout and assigns the size
-	var treemap = d3.tree().size([2000, width]);
+	var treemap = d3.tree().size([TREE_HEIGHT, width]);
 	// .separation(function(a, b) {
 	// 	// TODO: separation and size by depth
 	// 	return a.parent === b.parent ? 3 : 4;
@@ -114,7 +115,15 @@ $(function() {
 			.attr('transform', function(/*d*/) {
 				return 'translate(' + source.y0 + ',' + source.x0 + ')';
 			})
-			.on('click', click);
+			.on('click', click)
+			.on('mouseover', function(d) {
+				var bio = d3.select('#bio');
+				if (d.data.bio) {
+					bio.html('Bio: ' + d.data.bio);
+				} else {
+					bio.html('');
+				}
+			});
 
 		var boxW = 150;
 		var boxH = 34;
