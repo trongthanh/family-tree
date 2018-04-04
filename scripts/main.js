@@ -3,20 +3,19 @@
  *
  * Initially based on the collapsible tree example: https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
  */
-/*global $, d3, jsyaml*/
-$(function() {
-	var width = window.innerWidth;
-	var height = window.innerHeight;
+$(() => {
+	const width = window.innerWidth;
+	const height = window.innerHeight;
 	// append the svg obgect to the body of the page
 	// appends a 'group' element to 'svg'
 	// moves the 'group' element to the top left margin
-	var svg = d3
+	let svg = d3
 		.select('#tree')
 		.append('svg')
 		.attr('width', width)
 		.attr('height', height);
 
-	var rectBg = svg
+	const rectBg = svg
 		.append('rect')
 		.attr('width', width)
 		.attr('height', height)
@@ -24,10 +23,10 @@ $(function() {
 
 	svg = svg.append('g').attr('class', 'tree-container');
 
-	var zoom = d3
+	const zoom = d3
 		.zoom()
 		.scaleExtent([0.4, 4])
-		.on('zoom', function() {
+		.on('zoom', () => {
 			// console.log('on zoom', d3.event.transform);
 			svg.attr('transform', d3.event.transform);
 		});
@@ -39,18 +38,17 @@ $(function() {
 
 	rectBg.call(zoom);
 
-	var data = {
+	let data = {
 		name: 'Top Level',
 	};
+	let root;
 
-	$.get('data/trans.yml').done(function(dataStr) {
+	$.get('data/trans.yml').done(dataStr => {
 		console.log(dataStr);
 		data = jsyaml.load(dataStr);
 
 		// Assigns parent, children, height, depth
-		root = d3.hierarchy(data, function(d) {
-			return d.children;
-		});
+		root = d3.hierarchy(data, d => d.children);
 		root.x0 = height / 2;
 		root.y0 = 0;
 
@@ -60,13 +58,12 @@ $(function() {
 		update(root);
 	});
 
-	var i = 0;
-	var duration = 750;
-	var root;
-	var TREE_HEIGHT = 3600;
+	let i = 0;
+	const duration = 750;
+	const TREE_HEIGHT = 3600;
 
 	// declares a tree layout and assigns the size
-	var treemap = d3.tree().size([TREE_HEIGHT, width]);
+	const treemap = d3.tree().size([TREE_HEIGHT, width]);
 	// .separation(function(a, b) {
 	// 	// TODO: separation and size by depth
 	// 	return a.parent === b.parent ? 3 : 4;
@@ -84,49 +81,40 @@ $(function() {
 
 	function update(source) {
 		// Assigns the x and y position for the nodes
-		var treeData = treemap(root);
+		const treeData = treemap(root);
 
 		// Compute the new tree layout.
-		var nodes = treeData.descendants();
-		var links = treeData.descendants().slice(1);
+		const nodes = treeData.descendants();
+		const links = treeData.descendants().slice(1);
 
 		// Normalize for fixed-depth.
-		nodes.forEach(function(d) {
+		nodes.forEach(d => {
 			d.y = d.depth * 250;
 		});
 
 		// ****************** Nodes section ***************************
 
 		// Update the nodes...
-		var node = svg.selectAll('g.node').data(nodes, function(d) {
-			return d.id || (d.id = ++i);
-		});
+		const node = svg.selectAll('g.node').data(nodes, d => d.id || (d.id = ++i));
 
 		// Enter any new modes at the parent's previous position.
-		var nodeEnter = node
+		const nodeEnter = node
 			.enter()
 			.insert('g', ':first-child') // children should be below parents so that the transition looks nicer
-			.attr('class', function(d) {
-				if (d._children) {
-					return 'node node--has-children';
-				}
-				return 'node';
-			})
-			.attr('transform', function(/*d*/) {
-				return 'translate(' + source.y0 + ',' + source.x0 + ')';
-			})
+			.attr('class', d => (d._children ? 'node node--has-children' : 'node'))
+			.attr('transform', () => `translate(${source.y0},${source.x0})`)
 			.on('click', click)
-			.on('mouseover', function(d) {
-				var bio = d3.select('#bio');
+			.on('mouseover', d => {
+				const bio = d3.select('#bio');
 				if (d.data.bio) {
-					bio.html('Bio: ' + d.data.bio);
+					bio.html(`Bio: ${d.data.bio}`);
 				} else {
 					bio.html('');
 				}
 			});
 
-		var boxW = 150;
-		var boxH = 34;
+		const boxW = 150;
+		const boxH = 34;
 
 		// Add Rectangle as text box for the nodes
 		nodeEnter
@@ -137,8 +125,8 @@ $(function() {
 			.attr('height', boxH)
 			.attr('rx', 0) // corner radius x
 			.attr('ry', 0) // corner radius y
-			.attr('class', function(d) {
-				var gender = String(d.data.gender).toLowerCase();
+			.attr('class', d => {
+				const gender = String(d.data.gender).toLowerCase();
 				if (gender === 'female') {
 					return 'box box--female';
 				} else if (gender === 'male') {
@@ -151,114 +139,91 @@ $(function() {
 		nodeEnter
 			.append('text')
 			.classed('node-name', true)
-			.attr('dy', function(d) {
-				// shift it to vertically middle if alone
-				return d.data.spouse ? '-.2em' : '.35em';
-			})
+			.attr('dy', d => (d.data.spouse ? '-.2em' : '.35em')) // shift it to vertically middle if alone
 			.attr('text-anchor', 'middle')
-			.text(function(d) {
-				return d.data.name; // + d.depth;
-			});
+			.text(d => d.data.name);
 
 		// Add spouse name next to tree's member
 		nodeEnter
-			.filter(function(d) {
-				return !!d.data.spouse;
-			})
+			.filter(d => !!d.data.spouse)
 			.append('text')
 			.classed('spouse-name', true)
 			.attr('dy', '1em')
 			.attr('text-anchor', 'middle')
-			.text(function(d) {
-				return '⚭' + (d.data.spouse.name || d.data.spouse);
-			});
+			.text(d => `⚭${d.data.spouse.name || d.data.spouse}`);
 
 		// Add expand indicator
 		nodeEnter
-			.filter(function(d) {
-				return !!d._children;
-			})
+			.filter(d => !!d._children)
 			.append('text')
 			.classed('expand-icon', true)
 			.attr('text-anchor', 'middle')
 			.attr('x', boxW / 2 + 10)
 			.attr('y', 5) // shift middle
-			.attr('visibility', function(d) {
-				return d.children ? 'hidden' : 'visible';
-			})
+			.attr('visibility', d => (d.children ? 'hidden' : 'visible'))
 			.text('⊕');
 
 		// UPDATE
-		var nodeUpdate = nodeEnter.merge(node);
+		const nodeUpdate = nodeEnter.merge(node);
 
 		// Transition to the proper position for the node
 		nodeUpdate
 			.transition()
 			.duration(duration)
-			.attr('transform', function(d) {
-				return 'translate(' + d.y + ',' + d.x + ')';
-			});
+			.attr('transform', d => `translate(${d.y},${d.x})`);
 
 		// Update the expand / close indicator
-		nodeUpdate.selectAll('text.expand-icon').attr('visibility', function(d) {
-			return d.children ? 'hidden' : 'visible';
-		});
+		nodeUpdate.selectAll('text.expand-icon').attr('visibility', d => (d.children ? 'hidden' : 'visible'));
 
 		// Remove any exiting nodes
-		var nodeExit = node
+		const nodeExit = node
 			.exit()
 			.transition()
 			.duration(duration)
-			.attr('transform', function() {
-				return 'translate(' + source.y + ',' + source.x + ')';
-			})
+			.attr('transform', () => `translate(${source.y},${source.x})`)
 			.remove();
 
 		// On exit reduce the opacity of text labels
 		nodeExit.selectAll('text').style('fill-opacity', 0);
 
 		// ****************** links section ***************************
-		var connector = elbow;
+		const connector = elbow;
 
 		// Update the links...
-		var link = svg.selectAll('path.link').data(links, function(d) {
-			return d.id;
-		});
+		const link = svg.selectAll('path.link').data(links, d => d.id);
 
 		// Enter any new links at the parent's previous position.
-		var linkEnter = link
+		const linkEnter = link
 			.enter()
 			.insert('path', 'g')
 			.attr('class', 'link')
-			.attr('d', function() {
-				var o = { x: source.x0, y: source.y0 };
+			.attr('d', () => {
+				const o = { x: source.x0, y: source.y0 };
 				return connector(o, o);
 			});
 
 		// UPDATE
-		var linkUpdate = linkEnter.merge(link);
+		const linkUpdate = linkEnter.merge(link);
 
 		// Transition back to the parent element position
 		linkUpdate
 			.transition()
 			.duration(duration)
-			.attr('d', function(d) {
-				return connector(d, d.parent);
-			});
+			.attr('d', d => connector(d, d.parent));
 
 		// Remove any exiting links
 		link
 			.exit()
 			.transition()
 			.duration(duration)
-			.attr('d', function(/*d*/) {
-				var o = { x: source.x, y: source.y };
+			.attr('d', () => /*d*/ {
+				const o = { x: source.x, y: source.y };
 				return connector(o, o);
 			})
 			.remove();
 
 		// Store the old positions for transition.
-		nodes.forEach(function(d) {
+		nodes.forEach(d => {
 			d.x0 = d.x;
 			d.y0 = d.y;
 		});
@@ -266,7 +231,7 @@ $(function() {
 		// Creates a curved (diagonal) path from parent to the child nodes (UNUSED)
 		// eslint-disable-next-line
 		function diagonal(s, d) {
-			let path = `M ${s.y} ${s.x}
+			const path = `M ${s.y} ${s.x}
             C ${s.y + (d.y - s.y) * 0.8} ${s.x},
               ${s.y + (d.y - s.y) * 0.1} ${d.x},
               ${d.y} ${d.x}`;
@@ -276,7 +241,7 @@ $(function() {
 
 		// Mind that we are drawing with x & y swapped to turn the tree horizontal
 		function elbow(s, d) {
-			let hy = (s.y - d.y) / 2;
+			const hy = (s.y - d.y) / 2;
 			return `M${d.y},${d.x} H${d.y + hy} V${s.x} H${s.y}`;
 		}
 
