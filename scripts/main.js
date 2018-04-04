@@ -147,6 +147,13 @@ $(() => {
 			.classed('spouse-name', true)
 			.attr('dy', '1em')
 			.attr('text-anchor', 'middle')
+			.attr('style', d => {
+				const name = d.data.spouse.name || d.data.spouse;
+				// auto reduce font size so the long spouse names can fit
+				if (name.includes('&')) {
+					return 'font-size: 10px';
+				}
+			})
 			.text(d => `⚭${d.data.spouse.name || d.data.spouse}`);
 
 		// Add expand indicator

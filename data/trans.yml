@@ -264,7 +264,6 @@ children:
           - name: Trần Phước Huỳnh
             gender: male
             spouse: Lê T. Phương & Lưu T. Vui
-            boxW: 180
             children:
               - name: Trần Phước Tuân
                 gender: male
@@ -318,7 +317,6 @@ children:
               - name: Trần Văn Luông
                 gender: male
                 spouse: Đặng T. Nở & Trương T. Năm
-                boxW: 180
               - name: Trần Văn Đinh
                 gender: male
                 spouse: Nguyễn Thị Hàng
@@ -343,7 +341,6 @@ children:
               - name: Trần Thị Mản
                 gender: female
                 spouse: Huỳnh V. Thiệt & Trần V. Xinh
-                boxW: 180
               - name: Trần Văn Sáng
                 gender: male
           - name: Trần Văn Lai
@@ -414,7 +411,6 @@ children:
     gender: male
     children:
       - name: Trần Văn Đàn
-        boxW: 180
         gender: male
         spouse: Nguyễn T. Nghé & Đặng T. Đậu
         children:
