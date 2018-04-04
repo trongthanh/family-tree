@@ -1,13 +1,13 @@
-Draws a family tree in a descendant chart format (all descendants of an individual).
+## Trans Family Tree
 
-Click on a node to expand/collapse all descendants.
+* Draws a family tree in a descendant chart format (all descendants of an individual).
+* Click on a node to expand/collapse all descendants.
+* Drag around to navigate the tree
+* Mouse wheel Or Touch pad scroll to zoom
 
-Also includes a family book that shows the same data in a different format (see book.html).
+Live site: [https://int3ractive.com/family-tree/](https://int3ractive.com/family-tree/)
 
-Example:
-
-- https://int3ractive.com/d3-descendant-tree/index.html
-- https://int3ractive.com/d3-descendant-tree/book.html
+### Getting Started
 
 You have to run this from a server (can't just open the HTML file). The easiest way to do this, if you have python installed, is to run
 
@@ -20,28 +20,42 @@ $ yarn start
 
 this will start a live Node server at 0.0.0.0:8080 using `npx` and `live-server`
 
-<!-- FIXME: Below part need revise -->
+  - http://localhost:8080
 
-Use #sourcename to load a specific JSON file.
-  - 0.0.0.0:8000#stark loads json/stark.json
+The Tree is stored in author-friendly YAML format. Here's a template:
 
-Trees are stored in a simple JSON format, and repeating portions can be handled using the "source"
-attribute.
+```yml
+---
+name: Tran Van A
+gender: male
+bio: Some biography description
+image: url to image
+spouse: Nguyen Thi B
+children:
+  - name: Tran Van X
+    gender: male
+    spouse: Pham Thi N
+  - name: Tran Thi Y
+    gender: female
+```
 
-  - For example, { "name":"John Smith", "source":"json/children_of_john_smith.json" }
+### Colophon:
 
-  - This is useful for trees with cycles (cousins marrying each other) and multiple trees
-    sharing the same descendants (this is common if you have trees for more than one of your
-    ancestors).
+* Although this repo is fork from [Yakubovich/descendant_tree](https://github.com/Yakubovich/descendant_tree), I have completely rewritten the source based on this [D3 v4 version](https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd)
+* D3 Version 4
+* jQuery
 
-Uses d3.js to draw the tree.
-
-  - Based on Rob Schmuecker’s example: http://bl.ocks.org/robschmuecker/7880033
 
 ## TODO:
 
-- [ ] Source code maintenance (update configs, fix linters, and stuff)
-- [ ] Upgrade to latest D3, jQuery and other lib's versions
 - [ ] Enhance the theme and style
-- [ ] Implement Mobile friendly bio overlay
-- [ ] Implement expandable indicator
+- [ ] Revise "spouse" display
+- [ ] Bio overlay
+- [ ] Image attachment (in tree and bio)
+- [ ] Search box which will highlight results instantaneously
+- [ ] Auto-generated bio info from statistics (number of sons, daughters, grandchildren, in-laws...)
+- [ ] Highlight connection path of 2 chosen persons
+- [ ] Calculate address (danh xưng) between 2 chosen person (cô - cháu, anh em họ, bà - cháu nội...)
+- [ ] Some quick highlight checkboxes:
+    - [ ] Oldest sons
+
