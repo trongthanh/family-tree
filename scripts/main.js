@@ -31,12 +31,8 @@ $(() => {
 			svg.attr('transform', d3.event.transform);
 		});
 
-	// initial panning position
-	// FIXME: there is known issue that the tree container shift left suddently when start panning
-	zoom.translateBy(svg, 90, -500);
-	// svg.call(zoom.transform, d3.zoomIdentity.translate(90, 0));
-
-	rectBg.call(zoom);
+	// this is the correct way to set initial scale and translate
+	rectBg.call(zoom).call(zoom.transform, d3.zoomIdentity.translate(90, height / 2).scale(1));
 
 	let data = {
 		name: 'Top Level',
@@ -60,14 +56,18 @@ $(() => {
 
 	let i = 0;
 	const duration = 750;
-	const TREE_HEIGHT = 3600;
+	const boxW = 150;
+	const boxH = 34;
 
 	// declares a tree layout and assigns the size
-	const treemap = d3.tree().size([TREE_HEIGHT, width]);
-	// .separation(function(a, b) {
-	// 	// TODO: separation and size by depth
-	// 	return a.parent === b.parent ? 3 : 4;
-	// });
+	const treemap = d3
+		.tree()
+		.size([height, width])
+		.nodeSize([boxH, boxW])
+		.separation(function(a, b) {
+			// TODO: separation and size by depth
+			return a.parent === b.parent ? 1.2 : 2;
+		});
 
 	// Collapse the node and all it's children
 	function collapse(d) {
@@ -112,9 +112,6 @@ $(() => {
 					bio.html('');
 				}
 			});
-
-		const boxW = 150;
-		const boxH = 34;
 
 		// Add Rectangle as text box for the nodes
 		nodeEnter
