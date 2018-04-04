@@ -196,11 +196,19 @@ $(() => {
 		// Update the links...
 		const link = svg.selectAll('path.link').data(links, d => d.id);
 
+		const linkColors = d3
+			.scaleLinear()
+			.domain([1, 4, 8])
+			.range(['#00441b', '#29851F', '#7EA31E']);
+
 		// Enter any new links at the parent's previous position.
 		const linkEnter = link
 			.enter()
 			.insert('path', 'g')
 			.attr('class', 'link')
+			.attr('stroke', d => {
+				return linkColors(d.depth);
+			})
 			.attr('d', () => {
 				const o = { x: source.x0, y: source.y0 };
 				return connector(o, o);

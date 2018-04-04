@@ -5,6 +5,10 @@ html {
 	margin: 0;
 }
 
+.chart-container svg {
+	display: block;
+}
+
 .chart-bg {
 	fill: #ddd;
 	cursor: move;
@@ -21,11 +25,11 @@ html {
 }
 
 .box--female {
-	stroke: hotpink;
+	stroke: mediumvioletred;
 }
 
 .box--male {
-	stroke: steelblue;
+	stroke: royalblue;
 }
 
 .node-name,
@@ -35,7 +39,6 @@ html {
 
 .link {
 	fill: none;
-	stroke: #888;
 	stroke-width: 2px;
 }
 
