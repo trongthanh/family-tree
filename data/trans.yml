@@ -56,7 +56,7 @@ children:
                     gender: female
                   - name: Trần Thị Búp
                     gender: female
-              - name: Trần Văn Nhẵn
+              - name: Trần Văn Nhẵn (?)
                 gender: male
               - name: Trần Văn Thập
                 gender: male
@@ -99,7 +99,7 @@ children:
         children:
           - name: Trần Văn Thìn
             gender: male
-          - name: Trần Văn Tị
+          - name: Trần Văn Tỵ
             gender: male
             spouse: Phạm Thị Nghĩa
             children:
@@ -244,6 +244,19 @@ children:
           - name: Trần Phước Nhà
             gender: male
             spouse: Nguyễn Thị Hiền
+            children:
+              - name: Trần Thị Sanh
+                gender: female
+              - name: Trần Thị Đặng
+                gender: female
+              - name: Trần Thị Như
+                gender: female
+              - name: Trần Thị Bằng
+                gender: female
+              - name: Trần Thị Lộc
+                gender: female
+              - name: Trần Thị Thọ
+                gender: female
       - name: Trần Phước Diên
         gender: male
         spouse: Nguyễn Thị Huệ
@@ -251,6 +264,21 @@ children:
           - name: Trần Phước Huỳnh
             gender: male
             spouse: Lê T. Phương & Lưu T. Vui
+            boxW: 180
+            children:
+              - name: Trần Phước Tuân
+                gender: male
+                spouse: Nguyễn Thị Tròn
+              - name: Trần Phước Trừ
+                gender: male
+                spouse: Nguyễn Thị Truyện
+              - name: Trần Phước Kiên
+                gender: male
+                spouse: Võ Thị Qui
+              - name: Trần Phước Đề
+                gender: male
+                spouse: Nguyễn Thị Giai
+              - name: Trần Phước Điều
           - name: Trần Thị Tâm
             gender: female
           - name: Trần Thị Hải
@@ -279,15 +307,54 @@ children:
             spouse: Nguyễn Văn Gón
           - name: Trần Văn Tri
             gender: male
-          - name: Trần Văn Tri
-            gender: male
             spouse: Phạm Thị Bửu
+            children:
+              - name: Trần Thị Ngừ
+                gender: female
+                spouse: Nguyễn Văn Huê
+              - name: Trần Văn Hổ (?)
+                gender: male
+                spouse: Phạm Thị Thứ
+              - name: Trần Văn Luông
+                gender: male
+                spouse: Đặng T. Nở & Trương T. Năm
+                boxW: 180
+              - name: Trần Văn Đinh
+                gender: male
+                spouse: Nguyễn Thị Hàng
+              - name: Trần Văn Giàu
+                gender: male
+                spouse: Lê Thị Mua
+              - name: Trần Thị Sang
+                gender: female
+                spouse: Đàn Văn Tri
           - name: Trần Văn Hóa
             gender: male
             spouse: Phạm Thị Hường
+            children:
+              - name: Trần Văn Thường
+                gender: male
+                spouse: Ng. T. Trừ & Võ T. Nữ
+              - name: Trần Văn Sau
+                gender: male
+                spouse: Phạm Thị Mười
+              - name: Trần Thị Minh
+                gender: female
+              - name: Trần Thị Mản
+                gender: female
+                spouse: Huỳnh V. Thiệt & Trần V. Xinh
+                boxW: 180
+              - name: Trần Văn Sáng
+                gender: male
           - name: Trần Văn Lai
             gender: male
             spouse: Nguyễn Thị Nhiều
+            children:
+              - name: Trần Thị Hai
+                gender: female
+                spouse: Nguyễn Văn Giao
+              - name: Trần Văn Tát
+                gender: male
           - name: Trần Thị An
             gender: female
             spouse: Nguyễn V.Lưu & Võ V.Nóc
@@ -307,10 +374,42 @@ children:
         children:
           - name: Trần Văn Thạnh
             gender: male
-            spouse: Trịnh Thị Cầu
+            spouse: Trịnh Thị Cầu (?)
+            children:
+              - name: Trần Thị Kiếm
+                gender: female
+              - name: Trần Thị Kèm (?)
+                gender: female
+              - name: Trần Thị Xương
+                gender: female
+              - name: Trần Văn Chơn
+                gender: male
+                spouse: Phạm Thị Biến (?)
+              - name: Trần Thị Quỳnh
+                gender: female
+                spouse: Đoàn Văn Lý
+              - name: Trần Văn Sáng
+                gender: male
+                spouse: Nguyễn Thị Của
+              - name: Trần Văn Ưởng
+                gender: male
+                spouse: Lê Thị Ngô
+              - name: Trần Văn Hao
+                gender: male
+                spouse: Nguyễn Thị Chính
           - name: Trần Văn Nhu
             gender: male
             spouse: Phạm Thị Tươi
+            children:
+              - name: Trần Văn Ngàn
+                gender: male
+                spouse: Phạm Thị Quốc
+              - name: Trần Văn Tiết
+                gender: male
+                spouse: Nguyễn Thị Năm
+              - name: Phạm Thị Hạnh
+                gender: female
+                spouse: Đặng Văn Tốt
   - name: Con thứ 5 (?)
     gender: male
     children:
@@ -325,9 +424,35 @@ children:
           - name: Trần Văn Tân
             gender: male
             spouse: Phạm Thị Phải
+            children:
+              - name: Trần Văn Vo
+                gender: male
+                spouse: Trần Thị Hồng
+              - name: Trần Thị Chua
+                gender: female
+              - name: Trần Văn Chát
+                gender: male
+              - name: Trần Thị Xinh
+                gender: female
+                spouse: Lê Văn Lư
           - name: Trần Văn Khách
             gender: male
             spouse: Phạm Thị Điền
+            children:
+              - name: Trần Văn Long
+                gender: male
+                spouse: Nguyễn Thị Lộc
+              - name: Trần Văn Tràng
+                gender: male
+                spouse: Ngô Thị Luông
+              - name: Trần Văn Nhân
+                gender: male
+                spouse: Mai Thị Huỳnh
+              - name: Trần Thị Khiêm
+                gender: female
+              - name: Trần Thị Điều
+                gender: male
+                spouse: Phạm Đức Nhuận
           - name: Trần Thị Đủ
             gender: female
             spouse: Ngô Văn Tố
@@ -336,7 +461,15 @@ children:
             spouse: Nguyễn Văn Các
           - name: Trần Văn Thiệt
             gender: male
-            spouse: Phạm Thị Hiềm
+            spouse: Phạm Thị Hiềm (?)
+            children:
+              - name: Trần Thị Chanh
+                gender: female
+              - name: Trần Thị Bay
+                gender: female
+              - name: Trần Văn Lo
+                gender: male
+                spouse: Mai Thị Lê
           - name: Trần Thị Mai
             gender: female
             spouse: Nguyễn Văn Mạng

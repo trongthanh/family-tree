@@ -63,7 +63,7 @@ $(function() {
 	var i = 0;
 	var duration = 750;
 	var root;
-	var TREE_HEIGHT = 2400;
+	var TREE_HEIGHT = 3600;
 
 	// declares a tree layout and assigns the size
 	var treemap = d3.tree().size([TREE_HEIGHT, width]);
