@@ -39,6 +39,12 @@ $(() => {
 	};
 	let root;
 
+	// FIXME: debug
+	window.svg = svg;
+	window.zoom = zoom;
+	window.rectBg = rectBg;
+	window.data = data;
+
 	$.get('data/trans.yml').done(dataStr => {
 		console.log(dataStr);
 		data = jsyaml.load(dataStr);
@@ -79,7 +85,7 @@ $(() => {
 		}
 	}
 
-	function update(source) {
+	function update(source /*, clickedNode*/) {
 		// Assigns the x and y position for the nodes
 		const treeData = treemap(root);
 
@@ -240,33 +246,42 @@ $(() => {
 			d.y0 = d.y;
 		});
 
-		// Creates a curved (diagonal) path from parent to the child nodes (UNUSED)
-		// eslint-disable-next-line
-		function diagonal(s, d) {
-			const path = `M ${s.y} ${s.x}
-            C ${s.y + (d.y - s.y) * 0.8} ${s.x},
-              ${s.y + (d.y - s.y) * 0.1} ${d.x},
-              ${d.y} ${d.x}`;
+		// pan the tree to center the node
+		// NOTE: panning during click doesn't look right, disable for now
+		// if (source) {
+		// 	rectBg
+		// 		.transition()
+		// 		.duration(1000)
+		// 		.call(zoom.transform, d3.zoomIdentity.translate(width / 2 - source.y, height / 2 - source.x).scale(1));
+		// }
+	} // end of update()
 
-			return path;
-		}
+	// Creates a curved (diagonal) path from parent to the child nodes (UNUSED)
+	// eslint-disable-next-line
+	function diagonal(s, d) {
+		const path = `M ${s.y} ${s.x}
+			C ${s.y + (d.y - s.y) * 0.8} ${s.x},
+			  ${s.y + (d.y - s.y) * 0.1} ${d.x},
+			  ${d.y} ${d.x}`;
 
-		// Mind that we are drawing with x & y swapped to turn the tree horizontal
-		function elbow(s, d) {
-			const hy = (s.y - d.y) / 2;
-			return `M${d.y},${d.x} H${d.y + hy} V${s.x} H${s.y}`;
-		}
+		return path;
+	}
 
-		// Toggle children on click.
-		function click(d) {
-			if (d.children) {
-				d._children = d.children;
-				d.children = null;
-			} else {
-				d.children = d._children;
-				d._children = null;
-			}
-			update(d);
+	// Mind that we are drawing with x & y swapped to turn the tree horizontal
+	function elbow(s, d) {
+		const hy = (s.y - d.y) / 2;
+		return `M${d.y},${d.x} H${d.y + hy} V${s.x} H${s.y}`;
+	}
+
+	// Toggle children on click.
+	function click(d) {
+		if (d.children) {
+			d._children = d.children;
+			d.children = null;
+		} else {
+			d.children = d._children;
+			d._children = null;
 		}
+		update(d);
 	}
 });
