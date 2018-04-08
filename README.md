@@ -1,6 +1,7 @@
 ## Trans Family Tree
 
 * Draws a family tree in a descendant chart format (all descendants of an individual).
+* NOW with separated spouse position
 * Click on a node to expand/collapse all descendants.
 * Drag around to navigate the tree
 * Mouse wheel Or Touch pad scroll to zoom
@@ -49,11 +50,11 @@ children:
 ## TODO:
 
 - [ ] Enhance the theme and style
-- [ ] Revise "spouse" display
-- [ ] Bio overlay
-- [ ] Image attachment (in tree and bio)
+- [X] Revise "spouse" display
 - [ ] Search box which will highlight results instantaneously
+- [ ] Bio overlay
 - [ ] Auto-generated bio info from statistics (number of sons, daughters, grandchildren, in-laws...)
+- [ ] Image attachment (in tree and bio)
 - [ ] Highlight connection path of 2 chosen persons
 - [ ] Calculate address (danh xưng) between 2 chosen person (cô - cháu, anh em họ, bà - cháu nội...)
 - [ ] Some quick highlight checkboxes:

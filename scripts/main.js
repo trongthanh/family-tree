@@ -6,6 +6,22 @@
 $(() => {
 	const width = window.innerWidth;
 	const height = window.innerHeight;
+	const duration = 750;
+	const boxW = 150;
+	const boxH = 30;
+	const spouseSpace = 50; // space between 2 spouses box from center
+
+	let data = {
+		name: 'Top Level',
+	};
+	let root;
+	let i = 0;
+
+	const linkColors = d3
+		.scaleLinear()
+		.domain([1, 4, 8])
+		.range(['#00441b', '#29851F', '#7EA31E']);
+
 	// append the svg obgect to the body of the page
 	// appends a 'group' element to 'svg'
 	// moves the 'group' element to the top left margin
@@ -34,11 +50,6 @@ $(() => {
 	// this is the correct way to set initial scale and translate
 	rectBg.call(zoom).call(zoom.transform, d3.zoomIdentity.translate(90, height / 2).scale(1));
 
-	let data = {
-		name: 'Top Level',
-	};
-	let root;
-
 	// FIXME: debug
 	window.svg = svg;
 	window.zoom = zoom;
@@ -46,7 +57,7 @@ $(() => {
 	window.data = data;
 
 	$.get('data/trans.yml').done(dataStr => {
-		console.log(dataStr);
+		// console.log(dataStr);
 		data = jsyaml.load(dataStr);
 
 		// Assigns parent, children, height, depth
@@ -60,19 +71,30 @@ $(() => {
 		update(root);
 	});
 
-	let i = 0;
-	const duration = 750;
-	const boxW = 150;
-	const boxH = 34;
-
 	// declares a tree layout and assigns the size
 	const treemap = d3
 		.tree()
 		.size([height, width])
 		.nodeSize([boxH, boxW])
 		.separation(function(a, b) {
-			// TODO: separation and size by depth
-			return a.parent === b.parent ? 1.2 : 2;
+			// leave some space for the spouse block
+			if (b.data.spouse) {
+				if (a.data.spouse) {
+					// both a & b has spouse blocks
+					return 3.5;
+				}
+				// only b has spouse block
+				return 2.5;
+			} else if (a.data.spouse) {
+				// only a has spouse block
+				return 2.5;
+			} else if (a.parent === b.parent) {
+				// single siblings are close to save space
+				return 1.2;
+			}
+
+			//else (single cousins)
+			return 2;
 		});
 
 	// Collapse the node and all it's children
@@ -85,13 +107,14 @@ $(() => {
 		}
 	}
 
-	function update(source /*, clickedNode*/) {
+	function update(source) {
 		// Assigns the x and y position for the nodes
 		const treeData = treemap(root);
 
 		// Compute the new tree layout.
 		const nodes = treeData.descendants();
 		const links = treeData.descendants().slice(1);
+		// console.log('treeData', treeData);
 
 		// Normalize for fixed-depth.
 		nodes.forEach(d => {
@@ -119,11 +142,16 @@ $(() => {
 				}
 			});
 
+		// Add child block
+		const childEnter = nodeEnter.append('g').attr('transform', d => {
+			return d.data.spouse ? `translate(0, ${-spouseSpace / 2})` : 'translate(0, 0)';
+		});
+
 		// Add Rectangle as text box for the nodes
-		nodeEnter
+		childEnter
 			.append('rect')
 			.attr('x', d => (d.data.boxW ? -d.data.boxW / 2 : -boxW / 2))
-			.attr('y', -boxH / 2)
+			.attr('y', -boxH * 0.5)
 			.attr('width', d => d.data.boxW || boxW)
 			.attr('height', boxH)
 			.attr('rx', 0) // corner radius x
@@ -139,19 +167,53 @@ $(() => {
 			});
 
 		// Add labels for the nodes
-		nodeEnter
+		childEnter
 			.append('text')
 			.classed('node-name', true)
-			.attr('dy', d => (d.data.spouse ? '-.2em' : '.35em')) // shift it to vertically middle if alone
+			.attr('dy', '.35em') // shift it to vertically middle
 			.attr('text-anchor', 'middle')
 			.text(d => d.data.name);
 
-		// Add spouse name next to tree's member
-		nodeEnter
-			.filter(d => !!d.data.spouse)
+		const nodeFiltered = nodeEnter.filter(d => !!d.data.spouse);
+
+		// spouse link
+		nodeFiltered
+			.insert('line', ':first-child')
+			.attr('class', 'link')
+			.attr('stroke', d => {
+				return linkColors(d.depth);
+			})
+			.attr('x1', 0)
+			.attr('y1', -spouseSpace / 2)
+			.attr('x2', 0)
+			.attr('y2', spouseSpace / 2);
+
+		// Add spouse block
+		const spouseEnter = nodeFiltered.append('g').attr('transform', `translate(0, ${spouseSpace / 2})`);
+
+		// spouse block
+		spouseEnter
+			.append('rect')
+			.attr('x', d => `${d.data.boxW ? -d.data.boxW / 2 : -boxW / 2}`)
+			.attr('y', -boxH * 0.5)
+			.attr('width', d => d.data.boxW || boxW)
+			.attr('height', boxH)
+			.attr('class', d => {
+				const gender = String(d.data.gender).toLowerCase();
+				// spouse gender is assumedly reversed from main node
+				if (gender === 'female') {
+					return 'box box--male';
+				} else if (gender === 'male') {
+					return 'box box--female';
+				}
+				return 'box';
+			});
+
+		// spouse text
+		spouseEnter
 			.append('text')
 			.classed('spouse-name', true)
-			.attr('dy', '1em')
+			.attr('dy', '0.35em')
 			.attr('text-anchor', 'middle')
 			.attr('style', d => {
 				const name = d.data.spouse.name || d.data.spouse;
@@ -202,11 +264,6 @@ $(() => {
 		// Update the links...
 		const link = svg.selectAll('path.link').data(links, d => d.id);
 
-		const linkColors = d3
-			.scaleLinear()
-			.domain([1, 4, 8])
-			.range(['#00441b', '#29851F', '#7EA31E']);
-
 		// Enter any new links at the parent's previous position.
 		const linkEnter = link
 			.enter()
@@ -227,7 +284,14 @@ $(() => {
 		linkUpdate
 			.transition()
 			.duration(duration)
-			.attr('d', d => connector(d, d.parent));
+			.attr('d', d => {
+				if (d.data.spouse) {
+					// move link start (at child) a bit up since it is at new position
+					// because of spouse
+					return connector({ y: d.y, x: d.x - spouseSpace / 2 }, d.parent);
+				}
+				return connector(d, d.parent);
+			});
 
 		// Remove any exiting links
 		link
