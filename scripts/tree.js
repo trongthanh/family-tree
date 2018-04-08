@@ -1,3 +1,4 @@
+// DEPRECATED. TO BE REMOVED
 /* global d3, $, jsyaml*/
 
 var publicTree;

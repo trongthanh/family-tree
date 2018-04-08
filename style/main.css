@@ -10,7 +10,7 @@ html {
 }
 
 .chart-bg {
-	fill: #ddd;
+	fill: #f0f0f0;
 	cursor: move;
 }
 
@@ -19,16 +19,18 @@ html {
 }
 
 .box {
-	fill: #fff;
-	stroke: #888;
-	stroke-width: 2px;
+	fill: #eee;
+	stroke: #333;
+	stroke-width: 1px;
 }
 
 .box--female {
 	stroke: mediumvioletred;
+	fill: #ffd6ee;
 }
 
 .box--male {
+	fill: #d6ddff;
 	stroke: royalblue;
 }
 

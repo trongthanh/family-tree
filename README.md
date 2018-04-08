@@ -46,10 +46,12 @@ children:
 * D3 Version 4
 * jQuery
 
+### Limitations:
+
+* Since this chart is based on D3 Tree layout, we can only display chart with single Root ancestor
 
 ## TODO:
 
-- [ ] Enhance the theme and style
 - [X] Revise "spouse" display
 - [ ] Search box which will highlight results instantaneously
 - [ ] Bio overlay
@@ -57,6 +59,8 @@ children:
 - [ ] Image attachment (in tree and bio)
 - [ ] Highlight connection path of 2 chosen persons
 - [ ] Calculate address (danh xưng) between 2 chosen person (cô - cháu, anh em họ, bà - cháu nội...)
+- [ ] Enhance the theme and style
 - [ ] Some quick highlight checkboxes:
     - [ ] Oldest sons
+- [ ] Use 'book.html' algorithm to render semantic HTML beneath
 

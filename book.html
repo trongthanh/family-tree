@@ -1,7 +1,8 @@
 <html>
   <head>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/handlebars/handlebars.min.js"></script>
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="scripts/js-yaml.min.js"></script>
+    <script src="scripts/handlebars.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style/book.css">
   </head>
   <body>
@@ -15,7 +16,7 @@
         {{#if image}}
           <img src="{{image}}">
         {{else}}
-          <img src="images/placeholder{{#isFemale}}-female{{/isFemale}}.png">
+          <img src="images/placeholder{{#isFemale gender}}-female{{/isFemale}}.png">
         {{/if}}
         {{#if children}}
           <span class="expand">+{{children.length}}</span>

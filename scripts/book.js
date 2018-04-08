@@ -1,72 +1,50 @@
 /* global $, Handlebars*/
 
 $(document).ready(function() {
-  var jsonName = location.hash.split('#')[1] || 'trans';
-  var jsonPath = 'json/' + jsonName + '.json';
-  var context;
+	var context;
 
-  var publicTree;
-  var running = 1; // number of running asynchronous functions
+	$.get('data/trans.yml').done(dataStr => {
+		// console.log(dataStr);
+		var publicTree = jsyaml.load(dataStr);
 
-  function parseTree(tree, replace) {
-    if (typeof replace !== 'undefined') {
-      replace.children = tree.children;
-      parseTree(tree);
-    } else if (tree.source) {
-      running++;
-      $.getJSON(tree.source, function(treeData) {
-        running--;
-        parseTree(treeData, tree);
-      });
-    } else if (tree.children) {
-      $(tree.children).each(function() {
-        parseTree(this);
-      });
-    }
-  }
+		drawTree(publicTree);
+	});
 
-  $.getJSON(jsonPath, function(treeData) {
-    publicTree = treeData;
-    parseTree(publicTree);
-    running--;
-  });
+	function drawTree(data) {
+		context = data;
+		// Surname at first
+		$('h1').html('The ' + data.name.split(' ').shift() + ' Family');
 
-  function checkIfDone() {
-    if (running > 0) {
-      setTimeout(checkIfDone, 100);
-    } else {
-      drawTree(publicTree);
-    }
-  }
-  checkIfDone();
+		var source = $('#person-template').html();
+		Handlebars.registerPartial('person', $('#person-template').html());
+		Handlebars.registerHelper('isFemale', function(gender, options) {
+			// eslint-disable-line eqeqeq
+			if (gender === 'female') {
+				return options.fn(this);
+			} else {
+				return options.inverse(this);
+			}
+		});
+		var template = Handlebars.compile(source);
+		var html = template(context);
+		$('#tree').html(html);
 
-  function drawTree(data) {
-    context = data;
+		$('.person').on('click', 'img, .expand', function(e) {
+			$(this)
+				.siblings('.child')
+				.slideToggle();
 
-    $('h1').html('The ' + data.name.split(' ').pop() + ' Family');
+			// If you want to keep the bios hidden until clicked
+			// $(this).siblings(".name-and-bio").find(".bio").slideToggle();
 
-    var source = $('#person-template').html();
-    Handlebars.registerPartial('person', $('#person-template').html());
-    var template = Handlebars.compile(source);
-    var html = template(context);
-    $('#tree').html(html);
-
-    $('.person').on('click', 'img, .expand', function(e) {
-      $(this)
-        .siblings('.child')
-        .slideToggle();
-
-      // If you want to keep the bios hidden until clicked
-      // $(this).siblings(".name-and-bio").find(".bio").slideToggle();
-
-      if ($(this).hasClass('expand')) {
-        $(this).fadeToggle();
-      } else {
-        $(this)
-          .siblings('.expand')
-          .fadeToggle();
-      }
-      e.stopPropagation();
-    });
-  }
+			if ($(this).hasClass('expand')) {
+				$(this).fadeToggle();
+			} else {
+				$(this)
+					.siblings('.expand')
+					.fadeToggle();
+			}
+			e.stopPropagation();
+		});
+	}
 });
