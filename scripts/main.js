@@ -56,7 +56,7 @@ $(() => {
 	window.rectBg = rectBg;
 	window.data = data;
 
-	$.get('data/trans.yml').done(dataStr => {
+	$.get('data/greek-gods.yml').done(dataStr => {
 		// console.log(dataStr);
 		data = jsyaml.load(dataStr);
 

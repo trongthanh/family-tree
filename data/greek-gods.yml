@@ -1,0 +1,77 @@
+---
+# yamllint disable rule:line-length
+name: Chaos the Void
+bio: 'Chaos refers to the void state preceding the creation of the universe or cosmos in the Greek creation myths, or to the initial "gap" created by the original separation of heaven and earth.'
+image: images/placeholder.png
+children:
+  - name: Tartarus
+  - name: Eros
+  - name: Erebus
+  - name: Nyx
+  - name: Gaia the Earth
+    gender: female
+    image: https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Feuerbach_Gaea.jpg/220px-Feuerbach_Gaea.jpg
+    bio: 'In Greek mythology, Gaia, also spelled Gaea, is the personification of the Earth and one of the Greek primordial deities. Gaia is the ancestral mother of all life: the primal Mother Earth goddess. She is the mother of Uranus, from whose sexual union she bore the Titans and the Giants, and of Pontus, from whose union she bore the primordial sea gods. Her equivalent in the Roman pantheon was Terra.'
+    spouse:
+      name: Uranus the Sky
+      gender: male
+      image: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Aion_mosaic_Glyptothek_Munich_W504.jpg/220px-Aion_mosaic_Glyptothek_Munich_W504.jpg
+      bio: "Uranus was the primal Greek god personifying the sky and one of the Greek primordial deities. Uranus is associated with the Roman god Caelus. In Ancient Greek literature, Uranus or Father Sky was the son and husband of Gaia, Mother Earth. According to Hesiod's Theogony, Uranus was conceived by Gaia alone, but other sources cite Aether as his father. Uranus and Gaia were the parents of the first generation of Titans, and the ancestors of most of the Greek gods, but no cult addressed directly to Uranus survived into Classical times, and Uranus does not appear among the usual themes of Greek painted pottery. Elemental Earth, Sky, and Styx might be joined, however, in a solemn invocation in Homeric epic."
+    children:
+      - name: Oceanus
+      - name: Tethys
+      - name: Hyperion
+      - name: Theia
+      - name: Coeus
+      - name: Phoebe
+      - name: Cronus
+        gender: male
+        bio: 'In Greek mythology, Cronus, Cronos, or Kronos, was the leader and youngest of the first generation of Titans, the divine descendants of Uranus, the sky, and Gaia, the earth. He overthrew his father and ruled during the mythological Golden Age, until he was overthrown by his own son Zeus and imprisoned in Tartarus. According to Plato, however, the deities Phorcys, Cronus, and Rhea were the eldest children of Oceanus and Tethys.'
+        spouse:
+          name: Rhea
+          gender: female
+          bio: 'Rhea is a character in Greek mythology, the Titaness daughter of the earth goddess Gaia and the sky god Uranus, Gaia''s son. She is also the older sister and wife of Cronus. In early traditions, she is known as "the mother of gods" and therefore is strongly associated with Gaia and Cybele, who have similar functions. The classical Greeks saw her as the mother of the Olympian gods and goddesses, but not as an Olympian goddess in her own right. The Romans identified her with Magna Mater, and the Goddess Ops.'
+        children:
+          - name: Hestia
+            gender: female
+            bio: 'In Ancient Greek religion, Hestia is the virgin goddess of the hearth, the right ordering of domesticity, the family, the home, and the state. In Greek mythology, she is the daughter and firstborn child of Kronos and Rhea.'
+          - name: Hades
+            gender: male
+            image: https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Hades-et-Cerberus-III.jpg/220px-Hades-et-Cerberus-III.jpg
+            bio: "Hades, in the ancient Greek religion and myth, is the god of the dead and the king of the underworld, with which his name became synonymous. Hades was the eldest son of Cronus and Rhea, although the last son regurgitated by his father. He and his brothers, Zeus and Poseidon, defeated their father's generation of gods, the Titans, and claimed rulership over the cosmos. Hades received the underworld, Zeus the sky, and Poseidon the sea, with the solid earth, long the province of Gaia, available to all three concurrently. Hades was often portrayed with his three-headed guard dog Cerberus."
+          - name: Demeter
+            gender: female
+            image: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Demeter_Altemps_Inv8546.jpg/220px-Demeter_Altemps_Inv8546.jpg
+            bio: 'In ancient Greek religion and mythology, Demeter is the goddess of the harvest and agriculture, presiding over grains and the fertility of the earth. Her cult titles include Sito (Σιτώ), "she of the Grain", as the giver of food or grain, and Thesmophoros, "Law-Bringer", as a mark of the civilized existence of agricultural society.'
+          - name: Poseidon
+            gender: male
+            image: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/0036MAN_Poseidon.jpg/220px-0036MAN_Poseidon.jpg
+            bio: 'Poseidon was one of the Twelve Olympians in ancient Greek religion and myth, god of the sea, storms, earthquakes and horses. In pre-Olympian Bronze Age Greece, he was venerated as a chief deity at Pylos and Thebes. His Roman equivalent is Neptune.'
+          - name: Zeus
+            gender: male
+            image: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Jupiter_Smyrna_Louvre_Ma13.jpg/220px-Jupiter_Smyrna_Louvre_Ma13.jpg
+            bio: 'Zeus is the sky and thunder god in ancient Greek religion, who rules as king of the gods of Mount Olympus. His name is cognate with the first element of his Roman equivalent Jupiter. His mythologies and powers are similar, though not identical, to those of Indo-European deities such as Jupiter, Perkūnas, Perun, Indra and Thor.'
+            spouse:
+              name: Hera
+              gender: female
+            children:
+              - name: Hebe
+                gender: female
+              - name: Enyo
+                gender: female
+              - name: Hephaetus
+                gender: male
+                image: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vulcan_Coustou_Louvre_MR1814.jpg/220px-Vulcan_Coustou_Louvre_MR1814.jpg
+              - name: Eileithyia
+                gender: female
+              - name: Ares
+                gender: male
+          - name: Hera
+            gender: female
+            image: https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Hera_Campana_Louvre_Ma2283.jpg/220px-Hera_Campana_Louvre_Ma2283.jpg
+            bio: "Hera is the goddess of women, marriage, family, and childbirth in ancient Greek religion and myth, one of the Twelve Olympians and the sister-wife of Zeus. She is the daughter of the Titans Cronus and Rhea. Hera rules over Mount Olympus as queen of the gods. A matronly figure, Hera served as both the patroness and protectress of married women, presiding over weddings and blessing marital unions. One of Hera's defining characteristics is her jealous and vengeful nature against Zeus' numerous lovers and illegitimate offspring, as well as the mortals who cross her."
+      - name: Rhea
+      - name: Themis
+      - name: Mnemosyne
+      - name: Crius
+      - name: Iapetus
