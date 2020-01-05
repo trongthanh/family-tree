@@ -57,15 +57,22 @@ children:
             children:
               - name: Hebe
                 gender: female
+                image: https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Canova-Hebe_30_degree_view.jpg/133px-Canova-Hebe_30_degree_view.jpg
+                bio: Hebe in ancient Greek religion, is the goddess of youth or the prime of life. She is the daughter of Zeus and his older sister, Hera. Hebe was the cupbearer for the gods and goddesses of Mount Olympus, serving their nectar and ambrosia until she married Heracles ; her successor was the divine hero Ganymede. Another title of hers for this reason is Ganymeda, meaning "Gladdening Princess". Hebe was worshipped as the goddess of forgiveness or mercy at Sicyon.
               - name: Enyo
                 gender: female
+                bio: Enyo was a goddess of war in Classical Greek mythology. She frequently is associated with the war god Ares.
               - name: Hephaetus
                 gender: male
                 image: https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Vulcan_Coustou_Louvre_MR1814.jpg/220px-Vulcan_Coustou_Louvre_MR1814.jpg
+                bio: Hephaestus is the Greek god of blacksmiths, metalworking, carpenters, craftsmen, artisans, sculptors, metallurgy, fire, and volcanoes. Hephaestus' Roman equivalent is Vulcan. In Greek mythology, Hephaestus was either the son of Zeus and Hera or he was Hera's parthenogenous child. He was cast off Mount Olympus by his mother because of his deformity or, in another account, by Zeus for protecting Hera from his advances.
               - name: Eileithyia
                 gender: female
+                bio: Eileithyia or Ilithyia was the Greek goddess of childbirth and midwifery. In the cave of Amnisos (Crete) she was related with the annual birth of the divine child, and her cult is connected with Enesidaon, who was the chthonic aspect of the god Poseidon. It is possible that her cult is related with the cult of Eleusis. In his Seventh Nemean Ode, Pindar refers to her as the maid to or seated beside the Moirai (Fates) and responsible for creating offspring.
               - name: Ares
                 gender: male
+                image: https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Ares_Canope_Villa_Adriana_b.jpg/160px-Ares_Canope_Villa_Adriana_b.jpg
+                bio: Ares is the Greek god of war. He is one of the Twelve Olympians, the son of Zeus and Hera. In Greek literature, he often represents the physical or violent and untamed aspect of war and is the personification of sheer brutality, in contrast to his sister, the armored Athena, whose functions as a goddess of intelligence include military strategy and generalship.
           - name: Hera
             gender: female
             image: https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Hera_Campana_Louvre_Ma2283.jpg/220px-Hera_Campana_Louvre_Ma2283.jpg
