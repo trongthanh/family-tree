@@ -132,23 +132,15 @@ $(() => {
 			.insert('g', ':first-child') // children should be below parents so that the transition looks nicer
 			.attr('class', d => (d._children ? 'node node--has-children' : 'node'))
 			.attr('transform', () => `translate(${source.y0},${source.x0})`)
-			.on('click', click)
-			.on('mouseover', d => {
-				const bio = d3.select('#bio');
-				if (d.data.bio) {
-					bio.html(`Bio: ${d.data.bio}`);
-				} else {
-					bio.html('');
-				}
-			});
+			.on('click', click);
 
-		// Add child block
-		const childEnter = nodeEnter.append('g').attr('transform', d => {
+		// Add person block
+		const personBlock = nodeEnter.append('g').attr('transform', d => {
 			return d.data.spouse ? `translate(0, ${-spouseSpace / 2})` : 'translate(0, 0)';
 		});
 
 		// Add Rectangle as text box for the nodes
-		childEnter
+		personBlock
 			.append('rect')
 			.attr('x', d => (d.data.boxW ? -d.data.boxW / 2 : -boxW / 2))
 			.attr('y', -boxH * 0.5)
@@ -164,20 +156,28 @@ $(() => {
 					return 'box box--male';
 				}
 				return 'box';
+			})
+			.on('mouseover', d => {
+				const bio = d3.select('#bio');
+				if (d.data.bio) {
+					bio.html(`Bio: ${d.data.bio}`);
+				} else {
+					bio.html('');
+				}
 			});
 
 		// Add labels for the nodes
-		childEnter
+		personBlock
 			.append('text')
 			.classed('node-name', true)
 			.attr('dy', '.35em') // shift it to vertically middle
 			.attr('text-anchor', 'middle')
 			.text(d => d.data.name);
 
-		const nodeFiltered = nodeEnter.filter(d => !!d.data.spouse);
+		const nodeHasSpouse = nodeEnter.filter(d => !!d.data.spouse);
 
 		// spouse link
-		nodeFiltered
+		nodeHasSpouse
 			.insert('line', ':first-child')
 			.attr('class', 'link')
 			.attr('stroke', d => {
@@ -189,10 +189,10 @@ $(() => {
 			.attr('y2', spouseSpace / 2);
 
 		// Add spouse block
-		const spouseEnter = nodeFiltered.append('g').attr('transform', `translate(0, ${spouseSpace / 2})`);
+		const spouseBlock = nodeHasSpouse.append('g').attr('transform', `translate(0, ${spouseSpace / 2})`);
 
 		// spouse block
-		spouseEnter
+		spouseBlock
 			.append('rect')
 			.attr('x', d => `${d.data.boxW ? -d.data.boxW / 2 : -boxW / 2}`)
 			.attr('y', -boxH * 0.5)
@@ -201,16 +201,26 @@ $(() => {
 			.attr('class', d => {
 				const gender = String(d.data.gender).toLowerCase();
 				// spouse gender is assumedly reversed from main node
+				// TODO: pickup gender declared in spouse also
 				if (gender === 'female') {
 					return 'box box--male';
 				} else if (gender === 'male') {
 					return 'box box--female';
 				}
 				return 'box';
+			})
+			.on('mouseover', d => {
+				const spouse = d.data.spouse;
+				const bio = d3.select('#bio');
+				if (spouse.bio) {
+					bio.html(`Bio: ${spouse.bio}`);
+				} else {
+					bio.html('');
+				}
 			});
 
 		// spouse text
-		spouseEnter
+		spouseBlock
 			.append('text')
 			.classed('spouse-name', true)
 			.attr('dy', '0.35em')
